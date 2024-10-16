@@ -25,7 +25,7 @@ type CreateTransfersParams struct {
 }
 
 func (q *Queries) CreateTransfers(ctx context.Context, arg CreateTransfersParams) (Transfer, error) {
-	row := q.queryRow(ctx, q.createTransfersStmt, createTransfers, arg.FromAccountID, arg.ToAccountID, arg.Amount)
+	row := q.db.QueryRowContext(ctx, createTransfers, arg.FromAccountID, arg.ToAccountID, arg.Amount)
 	var i Transfer
 	err := row.Scan(
 		&i.ID,
@@ -44,7 +44,7 @@ RETURNING id, from_account_id, to_account_id, amount, created_at
 `
 
 func (q *Queries) DeleteTransfers(ctx context.Context, id int64) error {
-	_, err := q.exec(ctx, q.deleteTransfersStmt, deleteTransfers, id)
+	_, err := q.db.ExecContext(ctx, deleteTransfers, id)
 	return err
 }
 
@@ -54,7 +54,7 @@ WHERE id = $1 LIMIT 1
 `
 
 func (q *Queries) GetTransfer(ctx context.Context, id int64) (Transfer, error) {
-	row := q.queryRow(ctx, q.getTransferStmt, getTransfer, id)
+	row := q.db.QueryRowContext(ctx, getTransfer, id)
 	var i Transfer
 	err := row.Scan(
 		&i.ID,
@@ -82,7 +82,7 @@ type ListTransfersParams struct {
 }
 
 func (q *Queries) ListTransfers(ctx context.Context, arg ListTransfersParams) ([]Transfer, error) {
-	rows, err := q.query(ctx, q.listTransfersStmt, listTransfers,
+	rows, err := q.db.QueryContext(ctx, listTransfers,
 		arg.FromAccountID,
 		arg.ToAccountID,
 		arg.Limit,
