@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"simplebank/simplebank/util"
 	"testing"
 	"time"
@@ -44,7 +43,7 @@ func TestGetAccount(t *testing.T) {
 	require.Equal(t, account1.Username, account2.Username)
 	require.Equal(t, account1.Balance, account2.Balance)
 	require.Equal(t, account1.Currency, account2.Currency)
-	require.Equal(t, account1.CreatedAt, account2.CreatedAt, time.Second)
+	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
 
 }
 
@@ -56,7 +55,6 @@ func TestUpdateAccount(t *testing.T) {
 	}
 
 	account2, err := testQueries.UpdateAccount(context.Background(), arg)
-	fmt.Println(account1, account2)
 	require.NoError(t, err)
 	require.NotEmpty(t, account2)
 
@@ -84,6 +82,7 @@ func TestListAccounts(t *testing.T) {
 
 	for _, account := range accounts {
 		require.NotEmpty(t, account)
+		require.Equal(t, account.Username, arg.Username)
 	}
 }
 func TestDeleteAccount(t *testing.T) {
