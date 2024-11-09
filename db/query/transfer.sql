@@ -1,4 +1,4 @@
--- name: CreateTransfers :one
+-- name: CreateTransfer :one
 INSERT INTO transfers (
   from_account_id,to_account_id, amount
 ) VALUES (
@@ -18,7 +18,7 @@ LIMIT $3
 OFFSET $4;
 
 
--- name: DeleteTransfers :exec
+-- name: DeleteTransfer :exec
 DELETE FROM transfers
 WHERE id = $1
 RETURNING *;
