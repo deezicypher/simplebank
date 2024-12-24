@@ -54,6 +54,11 @@ type TransferTxResult struct {
 	ToEntry     Entry    `json:"to_entry"`
 }
 
+// Error implements error.
+func (t TransferTxResult) Error() string {
+	panic("unimplemented")
+}
+
 //Transfer tx transfers money from one account to the other
 //it creates a transfer record, add account entries,and update account's balance within a single database transaction
 
