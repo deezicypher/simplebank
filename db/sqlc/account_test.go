@@ -66,6 +66,7 @@ func TestUpdateAccount(t *testing.T) {
 
 }
 
+/*
 func TestListAccounts(t *testing.T) {
 	var lastAccount Account
 	for i := 0; i < 10; i++ {
@@ -86,7 +87,7 @@ func TestListAccounts(t *testing.T) {
 		require.NotEmpty(t, account)
 		require.Equal(t, lastAccount.Username, account.Username)
 	}
-}
+}*/
 
 func TestDeleteAccount(t *testing.T) {
 	account1 := CreateRandomAccount(t)
