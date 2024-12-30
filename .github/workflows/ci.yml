@@ -42,6 +42,17 @@ jobs:
     
     - uses: actions/checkout@v4
 
+    - name: Initialize Go module
+      run: |
+        if [ ! -f go.mod ]; then
+            echo "Initializing Go module...";
+            go mod init github.com/deezicypher/simplebank;
+        fi
+
+  # Install Go dependencies
+    - name: Install dependencies
+      run: go mod tidy
+
     - name: run golang-migrate
       run: |
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.12.2/migrate.linux-amd64.tar.gz | tar xvz
@@ -51,8 +62,6 @@ jobs:
     - name: run migrations
       run: make migrateup
 
-    - name: Install dependencies
-      run: go mod tidy
       
     - name: Test
       run: make test
