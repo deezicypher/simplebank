@@ -48,6 +48,7 @@ jobs:
 
     - name: run migrations
       run: make migrateup
-      
+
     - name: Test
+      working-directory: ../../
       run: make test
