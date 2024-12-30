@@ -20,7 +20,7 @@ jobs:
           # Provide the password for postgres
           env:
             POSTGRES_PASSWORD: postgres
-            POSTGRES_USER: root
+            POSTGRES_USER: postgres
             POSTGRES_DB: simplebank
 
           # Set health checks to wait until postgres has started
@@ -48,5 +48,6 @@ jobs:
 
     - name: run migrations
       run: make migrateup
+      
     - name: Test
       run: make test

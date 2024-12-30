@@ -7,9 +7,9 @@ dropdb:
 migrate:
 	migrate create -ext sql -dir db/migration -seq init_schema
 migrateup:
-	migrate -path db/migration -database "postgresql://root:postgres@localhost:5432/simplebank?sslmode=disable" -verbose up
+	migrate -path db/migration -database "postgresql://postgres:postgres@localhost:5432/simplebank?sslmode=disable" -verbose up
 migratedown:
-	migrate -path db/migration -database "postgresql://root:postgres@localhost:5432/simplebank?sslmode=disable" -verbose down
+	migrate -path db/migration -database "postgresql://postgres:postgres@localhost:5432/simplebank?sslmode=disable" -verbose down
 sqlc:
 	sqlc generate
 
