@@ -3,7 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
-	"simplebank/simplebank/util"
+	"simplebank/util"
 	"testing"
 	"time"
 
