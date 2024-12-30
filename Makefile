@@ -17,4 +17,4 @@ test:
 	go test -v -cover ./... 
 
 
-.PHONY: postgres createdb dropdb migrate migrateup migratedown sqlc
+.PHONY: postgres createdb dropdb migrate migrateup migratedown sqlc test
