@@ -8,7 +8,8 @@ on:
 
 jobs:
 
-  build:
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     # Service containers to run with `container-job`
@@ -33,8 +34,6 @@ jobs:
             - 5432:5432
 
     steps:
-   
-
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
